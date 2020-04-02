@@ -4,7 +4,7 @@ jobs:
     docker:
       - image: macnicadevops/cci-build-aws:1.0
     environment:
-      $repo: docker-local
+      repo: docker-local
     steps:
       - checkout
       - setup_remote_docker
