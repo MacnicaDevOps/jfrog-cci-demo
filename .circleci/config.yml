@@ -11,7 +11,7 @@ jobs:
           name: prepare environment
           command: |
             sudo apt-get update && sudo apt-get install -y curl
-            sudo curl -fL https://getcli.jfrog.io | sh
+            curl -fL https://getcli.jfrog.io | sh
             
       - run:
           name: "Configuring docker daemon to use insecure registries"
