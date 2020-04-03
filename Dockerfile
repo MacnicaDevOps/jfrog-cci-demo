@@ -1,2 +1,1 @@
-From nginx:1.12
-EXPOSE 80
+From ubuntu:12.04
