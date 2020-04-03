@@ -9,7 +9,7 @@ jobs:
       - checkout
       - setup_remote_docker
       
-    - run:
+      - run:
           name: "Configuring docker daemon to use insecure registries"
           command: |
             json=`mktemp`
