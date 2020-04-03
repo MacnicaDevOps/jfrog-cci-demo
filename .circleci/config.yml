@@ -17,7 +17,7 @@ jobs:
       - run:
           name: Configure JFrog CLI 
           command: |
-            /jfrog rt config --user=$user --password=$password --url="https://"$jfqdn2"/artifactory" $jid
+            /jfrog rt config --user=$user --password=$password --insecure-tls --url="https://"$jfqdn2"/artifactory" $jid
       - run:
           name: JFrogCLI Artifact publish, scan and promote
           command: |
