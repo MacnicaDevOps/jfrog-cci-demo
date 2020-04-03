@@ -8,10 +8,12 @@ jobs:
       - checkout
             
       - run:
-          name: prepare environment
+          name: prepare environment1
           command: |
             sudo apt-get update && sudo apt-get install -y curl
-            curl -fL https://getcli.jfrog.io | sh
+      - run:
+          name: prepare environment2
+          command: curl -fL https://getcli.jfrog.io | sh
             
       - run:
           name: "Configuring docker daemon to use insecure registries"
@@ -30,13 +32,13 @@ jobs:
       - run:
           name: Configure JFrog CLI 
           command: |
-            /jfrog rt config --user=$user --password=$password --insecure-tls --url="http://"$jfqdn2"/artifactory" $jid
+            jfrog rt config --user=$user --password=$password --insecure-tls --url="http://"$jfqdn2"/artifactory" $jid
       - run:
           name: JFrogCLI Artifact publish, scan and promote
           command: |
-           /jfrog rt bce $CIRCLE_PROJECT_REPONAME $CIRCLE_BUILD_NUM 
-           /jfrog rt bag $CIRCLE_PROJECT_REPONAME $CIRCLE_BUILD_NUM 
-           /jfrog rt dp $jfqdn2"/"$CIRCLE_PROJECT_REPONAME":"$CIRCLE_BUILD_NUM $repo --build-name=$CIRCLE_PROJECT_REPONAME --build-number=$CIRCLE_BUILD_NUM --insecure-tls
-           /jfrog rt bp $CIRCLE_PROJECT_REPONAME $CIRCLE_BUILD_NUM --insecure-tls
-           /jfrog rt bs $CIRCLE_PROJECT_REPONAME $CIRCLE_BUILD_NUM --insecure-tls
-           /jfrog rt bpr $CIRCLE_PROJECT_REPONAME $CIRCLE_BUILD_NUM $repo --insecure-tls
+           jfrog rt bce $CIRCLE_PROJECT_REPONAME $CIRCLE_BUILD_NUM 
+           jfrog rt bag $CIRCLE_PROJECT_REPONAME $CIRCLE_BUILD_NUM 
+           jfrog rt dp $jfqdn2"/"$CIRCLE_PROJECT_REPONAME":"$CIRCLE_BUILD_NUM $repo --build-name=$CIRCLE_PROJECT_REPONAME --build-number=$CIRCLE_BUILD_NUM --insecure-tls
+           jfrog rt bp $CIRCLE_PROJECT_REPONAME $CIRCLE_BUILD_NUM --insecure-tls
+           jfrog rt bs $CIRCLE_PROJECT_REPONAME $CIRCLE_BUILD_NUM --insecure-tls
+           jfrog rt bpr $CIRCLE_PROJECT_REPONAME $CIRCLE_BUILD_NUM $repo --insecure-tls
