@@ -21,8 +21,8 @@ jobs:
       - run:
           name: JFrogCLI Artifact publish, scan and promote
           command: |
-           /jfrog rt bce --insecure-tls $CIRCLE_PROJECT_REPONAME $CIRCLE_BUILD_NUM
-           /jfrog rt bag --insecure-tls $CIRCLE_PROJECT_REPONAME $CIRCLE_BUILD_NUM
-           /jfrog rt bp --insecure-tls $CIRCLE_PROJECT_REPONAME $CIRCLE_BUILD_NUM
-           /jfrog rt bs --insecure-tls $CIRCLE_PROJECT_REPONAME $CIRCLE_BUILD_NUM
-           /jfrog rt bpr --insecure-tls $CIRCLE_PROJECT_REPONAME $CIRCLE_BUILD_NUM $repo
+           /jfrog rt bce $CIRCLE_PROJECT_REPONAME $CIRCLE_BUILD_NUM --insecure-tls 
+           /jfrog rt bag $CIRCLE_PROJECT_REPONAME $CIRCLE_BUILD_NUM --insecure-tls 
+           /jfrog rt bp $CIRCLE_PROJECT_REPONAME $CIRCLE_BUILD_NUM --insecure-tls
+           /jfrog rt bs $CIRCLE_PROJECT_REPONAME $CIRCLE_BUILD_NUM --insecure-tls
+           /jfrog rt bpr $CIRCLE_PROJECT_REPONAME $CIRCLE_BUILD_NUM $repo --insecure-tls
