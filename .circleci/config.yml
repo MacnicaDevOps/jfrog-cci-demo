@@ -8,14 +8,6 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-      
-      - run:
-          name: "Configuring docker daemon to use insecure registries"
-          command: |
-            mkdir /etc/docker
-            echo '{ "insecure-registries": [ "35.192.149.57:80" ] }' > /etc/docker/daemon.json
-            service docker restart
-            echo "Configured Docker daemon with insecure-registry"
             
       - run:
           name: Build Image
@@ -25,7 +17,7 @@ jobs:
       - run:
           name: Configure JFrog CLI 
           command: |
-            /jfrog rt config --user=$user --password=$password --url="http://"$jfqdn2"/artifactory" $jid
+            /jfrog rt config --user=$user --password=$password --url="https://"$jfqdn2"/artifactory" $jid
       - run:
           name: JFrogCLI Artifact publish, scan and promote
           command: |
