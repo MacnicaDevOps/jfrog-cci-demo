@@ -1,19 +1,32 @@
 version: 2
 jobs:
   build:
-    docker:
-      - image: macnicadevops/cci-build-aws:1.0
+    executor: machine
     environment:
       repo: docker-local
     steps:
       - checkout
-      - setup_remote_docker
+            
+      - run:
+          name: prepare environment
+          command: |
+            sudo apt-get update && apt-get install -y curl
+            curl -fL https://getcli.jfrog.io | sh
+            
+      - run:
+          name: "Configuring docker daemon to use insecure registries"
+          command: |
+            json=`mktemp`
+            echo '{ "insecure-registries": [ "35.192.149.57:80" ] }' > ${json}
+            sudo mv ${json} /etc/docker/daemon.json
+            sudo service docker restart
+            echo "Configured Docker daemon with insecure-registry"
             
       - run:
           name: Build Image
           command: |
             docker build -t $jfqdn2"/"$CIRCLE_PROJECT_REPONAME":"$CIRCLE_BUILD_NUM .
-
+            
       - run:
           name: Configure JFrog CLI 
           command: |
