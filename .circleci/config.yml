@@ -12,7 +12,7 @@ jobs:
       - run:
           name: Build Image
           command: |
-            docker build -t $repo"."$jfqdn2"/"$CIRCLE_PROJECT_REPONAME":"$CIRCLE_BUILD_NUM .
+            docker build -t $jfqdn2"/"$CIRCLE_PROJECT_REPONAME":"$CIRCLE_BUILD_NUM .
 
       - run:
           name: Configure JFrog CLI 
@@ -23,6 +23,7 @@ jobs:
           command: |
            /jfrog rt bce $CIRCLE_PROJECT_REPONAME $CIRCLE_BUILD_NUM 
            /jfrog rt bag $CIRCLE_PROJECT_REPONAME $CIRCLE_BUILD_NUM 
-           /jfrog rt dp $CIRCLE_PROJECT_REPONAME $CIRCLE_BUILD_NUM --insecure-tls
+           /jfrog rt dp $jfqdn2"/"$CIRCLE_PROJECT_REPONAME":"$CIRCLE_BUILD_NUM $repo --build-name=$CIRCLE_PROJECT_REPONAME --build-number=$CIRCLE_BUILD_NUM --insecure-tls
+           /jfrog rt bp $CIRCLE_PROJECT_REPONAME $CIRCLE_BUILD_NUM --insecure-tls
            /jfrog rt bs $CIRCLE_PROJECT_REPONAME $CIRCLE_BUILD_NUM --insecure-tls
            /jfrog rt bpr $CIRCLE_PROJECT_REPONAME $CIRCLE_BUILD_NUM $repo --insecure-tls
