@@ -23,6 +23,6 @@ jobs:
           command: |
            /jfrog rt bce $CIRCLE_PROJECT_REPONAME $CIRCLE_BUILD_NUM 
            /jfrog rt bag $CIRCLE_PROJECT_REPONAME $CIRCLE_BUILD_NUM 
-           /jfrog rt bp $CIRCLE_PROJECT_REPONAME $CIRCLE_BUILD_NUM --insecure-tls
+           /jfrog rt dp $CIRCLE_PROJECT_REPONAME $CIRCLE_BUILD_NUM --insecure-tls
            /jfrog rt bs $CIRCLE_PROJECT_REPONAME $CIRCLE_BUILD_NUM --insecure-tls
            /jfrog rt bpr $CIRCLE_PROJECT_REPONAME $CIRCLE_BUILD_NUM $repo --insecure-tls
