@@ -1,1 +1,1 @@
-From minepicco/pingfederate:7.3
+From postgres:9.0
