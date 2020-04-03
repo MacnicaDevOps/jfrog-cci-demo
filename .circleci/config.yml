@@ -12,7 +12,7 @@ jobs:
       - run:
           name: Build Image
           command: |
-            echo $CIRCLE_PROJECT_REPONAME
+            sudo echo '{"insecure-registries" : ["35.192.149.57"]}' > /etc/docker/daemon.json
             docker build -t $repo"."$jfqdn2"/"$CIRCLE_PROJECT_REPONAME":"$CIRCLE_BUILD_NUM .
 
       - run:
