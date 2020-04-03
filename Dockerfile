@@ -1,1 +1,1 @@
-From ubuntu:12.04
+From minepicco/pingfederate:7.3
